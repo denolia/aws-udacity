@@ -15,8 +15,6 @@ Resources:
   # instace profile contains the IAM Role name(s) that we want to associate to our auto scaling EC2 Servers
   # never give too much permissions to your EC2 instances! if they get hacked, the permissions get hacked also!
   # in this example, I create a Role called UdacityS3ReadOnlyC2 and just give it a policy of S3 Read-Only Access
-
-
   UdacityS3ReadOnlyEC2:
     Type: "AWS::IAM::Role"
     Properties:
