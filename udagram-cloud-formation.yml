@@ -43,16 +43,11 @@ Resources:
               Resource: 'arn:aws:s3:::*'
       Roles:
         - !Ref UdacityS3ReadOnlyEC2
-
-#              Action:
-#                - 's3:ListBucket'
-#                - 's3:GetObject*'
-#
-#  ProfileWithRolesForOurApp:
-#    Type: AWS::IAM::InstanceProfile
-#    Properties:
-#      Roles:
-#        - UdacityS3ReadOnlyEC2
+  ProfileWithRolesForOurApp:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref UdacityS3ReadOnlyEC2
   UdacityVPC:
     Type: 'AWS::EC2::VPC'
     Properties:
