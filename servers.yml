@@ -80,7 +80,9 @@ Resources:
           #!/bin/bash
           sudo apt-get update -y
           sudo apt-get install apache2 -y
-          sudo systemctl start apache2.service          
+          sudo systemctl start apache2.service
+          cd /var/www/html
+          sudo bash -c "echo Udacity Demo Web Server Up and Running! > index.html"
       ImageId: ami-0729e439b6769d6ab
 #      KeyName: Udagram-keypair
       SecurityGroups:
@@ -135,7 +137,7 @@ Resources:
   WebAppTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-      HealthCheckIntervalSeconds: 10
+      HealthCheckIntervalSeconds: 30
       HealthCheckPath: /
       HealthCheckProtocol: HTTP
       HealthCheckTimeoutSeconds: 8
