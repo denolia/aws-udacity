@@ -1,5 +1,5 @@
 Description: >
-    Carlos Rivas / Udacity 2019
+    Carlos Rivas and Julia / Udacity 2019
 
 Parameters:
 
@@ -7,6 +7,37 @@ Parameters:
         Description: An environment name that will be prefixed to resource names
         Type: String
 Resources:
+  UdacityS3ReadOnlyEC2:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -   Effect: Allow
+              Principal:
+                Service:
+                  - s3.amazonaws.com
+              Action:
+                - sts:AssumeRole
+  UdacityS3ReadOnlyEC2Policy:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: UdacityS3ReadOnlyEC2Policy
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -   Effect: Allow
+              Action:
+                - 's3:ListBucket'
+                - 's3:GetObject*'
+              Resource: 'arn:aws:s3:::*'
+      Roles:
+        - !Ref UdacityS3ReadOnlyEC2
+  ProfileWithRolesForOurApp:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref UdacityS3ReadOnlyEC2
   LBSecGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -55,7 +86,7 @@ Resources:
           sudo apt-get install apache2 -y
           sudo systemctl start apache2.service          
       # ToDo: AMI ID of Ubuntu Linux machine. Too get one, try creating a VM from the web console. 
-      ImageId: ami-0747bdcabd34c712a
+      ImageId: ami-0729e439b6769d6ab
       KeyName: Udagram-keypair
       SecurityGroups:
       - Ref: WebServerSecGroup
@@ -72,8 +103,8 @@ Resources:
           !Sub "${EnvironmentName}-PRIV-NETS"
       LaunchConfigurationName:
         Ref: WebAppLaunchConfig
-      MinSize: '3'
-      MaxSize: '5'
+      MinSize: '4'
+      MaxSize: '6'
       TargetGroupARNs:
       - Ref: WebAppTargetGroup
   WebAppLB:
