@@ -17,3 +17,7 @@ sudo bash -c "echo Udacity Demo Web Server Up and Running! > index.html"
 
 #### server-parameters.json
 JSON file with parameters for the server.yml CloudFormation script
+
+### Architecture diagram
+
+![](final-challange.png)
