@@ -1,6 +1,6 @@
 ### Udacity course ND9991
 
-This repo was used for submitting a solution for the final task to the "Infrastructure as Code" course.
+This repo was used for submitting a solution to the final task in the "Infrastructure as Code" course.
 
 ### Deploy a high-availability web app using CloudFormation
 This folder provides the solution code for the "ND9991 - C2- Infrastructure as Code - Deploy a high-availability web app using CloudFormation" project. This folder contains the following files:
